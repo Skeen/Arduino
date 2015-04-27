@@ -50,13 +50,13 @@ void ESP8266WiFiClass::mode(WiFiMode m)
 }
 
 
-int ESP8266WiFiClass::begin(const char* ssid)
+wl_status_t ESP8266WiFiClass::begin(const char* ssid)
 {
     return begin(ssid, 0);
 }
 
 
-int ESP8266WiFiClass::begin(const char* ssid, const char *passphrase)
+wl_status_t ESP8266WiFiClass::begin(const char* ssid, const char *passphrase)
 {
     if (wifi_get_opmode() == WIFI_AP)
     {
@@ -92,7 +92,7 @@ void ESP8266WiFiClass::config(IPAddress local_ip, IPAddress gateway, IPAddress s
     wifi_set_ip_info(STATION_IF, &info);
 }
 
-int ESP8266WiFiClass::disconnect()
+wl_status_t ESP8266WiFiClass::disconnect()
 {
     struct station_config conf;
     *conf.ssid = 0;
@@ -101,7 +101,7 @@ int ESP8266WiFiClass::disconnect()
     wifi_station_set_config(&conf);
     wifi_station_disconnect();
     ETS_UART_INTR_ENABLE();
-    return 0;
+    return WL_IDLE_STATUS;
 }
 
 void ESP8266WiFiClass::softAP(const char* ssid)
@@ -336,7 +336,7 @@ uint8_t ESP8266WiFiClass::encryptionType(uint8_t i)
     return -1;
 }
 
-uint8_t ESP8266WiFiClass::status()
+wl_status_t ESP8266WiFiClass::status()
 {
     int status = wifi_station_get_connect_status();
 
