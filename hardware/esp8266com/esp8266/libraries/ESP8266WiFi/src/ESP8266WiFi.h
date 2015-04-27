@@ -47,7 +47,7 @@ public:
      *
      * param ssid: Pointer to the SSID string.
      */
-    int begin(const char* ssid);
+    wl_status_t begin(const char* ssid);
 
     /* Start Wifi connection with passphrase
      * the most secure supported mode will be automatically selected
@@ -56,7 +56,7 @@ public:
      * param passphrase: Passphrase. Valid characters in a passphrase
      *        must be between ASCII 32-126 (decimal).
      */
-    int begin(const char* ssid, const char *passphrase);
+    wl_status_t begin(const char* ssid, const char *passphrase);
 
 
     /* Set up an open access point
@@ -96,7 +96,7 @@ public:
      *
      * return: one value of wl_status_t enum
      */
-    int disconnect(void);
+    wl_status_t disconnect(void);
 
     /*
      * Get the station interface MAC address.
@@ -195,7 +195,7 @@ public:
      *
      * return: one of the value defined in wl_status_t
      */
-    uint8_t status();
+    wl_status_t status();
 
     /*
      * Resolve the given hostname to an IP address.
